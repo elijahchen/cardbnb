@@ -1,0 +1,26 @@
+{
+  "name": "cardbnb",
+  "version": "1.0.0",
+  "description": "Website for vagabonds to find a temporary home, never needing to worry about finding the next place to stay.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elijahchen/cardbnb.git"
+  },
+  "keywords": [
+    "cardbnb"
+  ],
+  "author": "Elijah Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elijahchen/cardbnb/issues"
+  },
+  "homepage": "https://github.com/elijahchen/cardbnb#readme",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
+  }
+}
