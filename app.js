@@ -25,7 +25,7 @@ app.post("/locations", function (req, res) {
    var name = req.body.name;
    var image = req.body.image;
    var newLoc = {name: name, image: image};
-   locations.push(newLoc);
+   locations.unshift(newLoc);
    res.redirect("/locations")
 });
 
