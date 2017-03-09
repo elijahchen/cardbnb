@@ -21,9 +21,15 @@ app.get("/locations", function (req, res) {
     res.render("locations", {locations: locations});
 });
 
+app.get("/locations/new", function (req, res) {
+   res.render("new.ejs");
+});
+
 app.post("/locations", function (req, res) {
     res.send("POST ROUTE HERE");
 });
+
+app.get("/locations/new");
 
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
