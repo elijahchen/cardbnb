@@ -1,5 +1,10 @@
 <h1>This is the locations page</h1>
 
-<p>Welcome to cardbnb</p>
-
-<a href="/locations">View all locations</a>
+<% locations.forEach(function (loc) { %>
+    <div>
+        <h4>
+            <%= loc.name%>
+        </h4>
+        <img src=" <%= loc.image %> ">
+    </div>
+<% }); %>

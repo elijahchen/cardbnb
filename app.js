@@ -8,14 +8,15 @@ app.get("/", function (req,res) {
 });
 
 app.get("/locations", function (req, res) {
-    var loc = [
-        {name: "loc 1", image: "http://c2.staticflickr.com/2/1414/856595888_fef1676db4_z.jpg?zz=1"},
-        {name: "loc 2", image: "http://c2.staticflickr.com/2/1414/856595888_fef1676db4_z.jpg?zz=1"},
-        {name: "loc 3", image: "http://c2.staticflickr.com/2/1414/856595888_fef1676db4_z.jpg?zz=1"},
-        {name: "loc 4", image: "http://c2.staticflickr.com/2/1414/856595888_fef1676db4_z.jpg?zz=1"},
-        {name: "loc 5", image: "http://c2.staticflickr.com/2/1414/856595888_fef1676db4_z.jpg?zz=1"},
-        {name: "loc 6", image: "http://c2.staticflickr.com/2/1414/856595888_fef1676db4_z.jpg?zz=1"},
+    var locations = [
+        {name: "loc 1", image: "http://i.imgur.com/K5maUDc.jpg"},
+        {name: "loc 2", image: "http://i.imgur.com/K5maUDc.jpg"},
+        {name: "loc 3", image: "http://i.imgur.com/K5maUDc.jpg"},
+        {name: "loc 4", image: "http://i.imgur.com/K5maUDc.jpg"},
+        {name: "loc 5", image: "http://i.imgur.com/K5maUDc.jpg"},
+        {name: "loc 6", image: "http://i.imgur.com/K5maUDc.jpg"},
     ];
+    res.render("locations", {locations: locations});
 });
 
 app.listen(3000, process.env.IP, function () {
