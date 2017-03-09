@@ -1,16 +1,27 @@
 <% include partials/header %>
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Explore Our Locations!</h1>
+            <p>Make life lasting memories.</p>
+            <p>
+                <a class="btn btn-primary btn-large" href="/locations/new">Add a new location</a>
+            </p>
+        </div>
+    </header>
 
-<h1>This is the locations page</h1>
-
-<a href="/locations/new">Add a new location</a>
-
-<% locations.forEach(function (loc) { %>
-    <div>
-        <h4>
-            <%= loc.name%>
-        </h4>
-        <img src=" <%= loc.image %> ">
+    <div class="row">
+        <% locations.forEach(function (loc) { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= loc.image %>">
+                    <div class="caption">
+                        <h4><%= loc.name %></h4>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
     </div>
-<% }); %>
+</div>
 
 <% include partials/footer %>

@@ -12,6 +12,7 @@ var locations = [
     {name: "loc 4", image: "http://i.imgur.com/K5maUDc.jpg"},
     {name: "loc 5", image: "http://i.imgur.com/K5maUDc.jpg"},
     {name: "loc 6", image: "http://i.imgur.com/K5maUDc.jpg"},
+    {name: "loc 7", image: "http://i.imgur.com/K5maUDc.jpg"},
 ];
 
 app.get("/", function (req,res) {
