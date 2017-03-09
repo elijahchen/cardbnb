@@ -1,3 +1,5 @@
+<% include partials/header %>
+
 <h1>This is the locations page</h1>
 
 <% locations.forEach(function (loc) { %>
@@ -8,3 +10,5 @@
         <img src=" <%= loc.image %> ">
     </div>
 <% }); %>
+
+<% include partials/footer %>
