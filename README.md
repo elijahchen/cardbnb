@@ -10,6 +10,10 @@ Each location has:
 - Name
 - Image
 
-#Style:
+#Style locations.ejs:
 - Add a better header/title
 - Make locations display in a grid
+
+#Style Navbar and Form:
+- Add a navbar to all templates
+- Style the new locations form
