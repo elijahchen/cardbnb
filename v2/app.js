@@ -3,8 +3,31 @@ var express     = require("express"),
     mongoose    = require("mongoose"),
     app         = express();
 
+mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+
+// === Schema Setup ===
+var locationSchema = new mongoose.Schema({
+    name: String,
+    image: String
+});
+
+// === Model Setup ===
+var Location = mongoose.model("Location", locationSchema);
+
+Location.create(
+    {
+        name: "loc 1",
+        image: "http://i.imgur.com/K5maUDc.jpg"
+    }, function (err, location){
+        if(err){
+            console.log(err);
+        } else {
+            console.log("Newly created location");
+            console.log(location);
+        }
+    });
 
 var locations = [
     {name: "loc 1", image: "http://i.imgur.com/K5maUDc.jpg"},
