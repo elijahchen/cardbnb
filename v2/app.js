@@ -16,42 +16,43 @@ var locationSchema = new mongoose.Schema({
 // === Model Setup ===
 var Location = mongoose.model("Location", locationSchema);
 
-Location.create(
-    {
-        name: "loc 1",
-        image: "http://i.imgur.com/K5maUDc.jpg"
-    }, function (err, location){
-        if(err){
-            console.log(err);
-        } else {
-            console.log("Newly created location");
-            console.log(location);
-        }
-    });
-
-var locations = [
-    {name: "loc 1", image: "http://i.imgur.com/K5maUDc.jpg"},
-    {name: "loc 2", image: "http://i.imgur.com/K5maUDc.jpg"},
-    {name: "loc 3", image: "http://i.imgur.com/K5maUDc.jpg"},
-    {name: "loc 4", image: "http://i.imgur.com/K5maUDc.jpg"},
-    {name: "loc 5", image: "http://i.imgur.com/K5maUDc.jpg"},
-    {name: "loc 6", image: "http://i.imgur.com/K5maUDc.jpg"},
-    {name: "loc 7", image: "http://i.imgur.com/K5maUDc.jpg"},
-];
+// var locations = [
+//     {name: "loc 1", image: "https://mgnsw.org.au/media/thumbs/uploads/images/DSC_0062_2.jpg.600x400_q85_crop_upscale.jpg"},
+//     {name: "loc 2", image: "http://playtivities.com/wp-content/uploads/2015/01/simple-cardboard-house-600x399.jpg"},
+//     {name: "loc 3", image: "https://c.fastcompany.net/multisite_files/fastcompany/imagecache/slideshow_large/slideshow/2013/11/3021937-slide-750-origami-02.jpg"},
+//     {name: "loc 4", image: "http://www.cbc.ca/strombo/content/images/the-street-house-feature.jpg"},
+//     {name: "loc 5", image: "http://gossiplyfe.com/wp-content/uploads/2015/02/Box_Homes_KLEW.jpg"},
+//     {name: "loc 6", image: "https://s-media-cache-ak0.pinimg.com/736x/70/f7/9d/70f79de59fc36dba5c5779a112850385.jpg"},
+//     {name: "loc 7", image: "http://icdn7.digitaltrends.com/image/wikkel1-720x480-c.png"},
+// ];
 
 app.get("/", function (req,res) {
     res.render("landing");
 });
 
 app.get("/locations", function (req, res) {
-    res.render("locations", {locations: locations});
+    //Get all locations from DB
+    Location.find({}, function (err, allLocations) {
+        if(err){
+            console.log(err);
+        } else {
+            res.render("locations", {locations:allLocations});
+        }
+    });
 });
+
 app.post("/locations", function (req, res) {
    var name = req.body.name;
    var image = req.body.image;
    var newLoc = {name: name, image: image};
-   locations.unshift(newLoc);
-   res.redirect("/locations")
+   //Create a new location and save to DB
+    Location.create(newLoc, function (err, loc) {
+        if(err){
+            console.log("ERROR");
+        } else {
+            res.redirect("/locations");
+        }
+    });
 });
 
 app.get("/locations/new", function (req, res) {
