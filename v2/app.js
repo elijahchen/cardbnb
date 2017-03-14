@@ -10,7 +10,8 @@ app.set("view engine", "ejs");
 // === Schema Setup ===
 var locationSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 // === Model Setup ===
@@ -30,6 +31,7 @@ app.get("/", function (req,res) {
     res.render("landing");
 });
 
+//INDEX ROUTE - show all locations
 app.get("/locations", function (req, res) {
     //Get all locations from DB
     Location.find({}, function (err, allLocations) {
@@ -41,6 +43,7 @@ app.get("/locations", function (req, res) {
     });
 });
 
+//CREATE - Add new route to database
 app.post("/locations", function (req, res) {
    var name = req.body.name;
    var image = req.body.image;
@@ -55,14 +58,20 @@ app.post("/locations", function (req, res) {
     });
 });
 
+//NEW - show form to create new location
 app.get("/locations/new", function (req, res) {
    res.render("new.ejs");
 });
+
 app.post("/locations", function (req, res) {
     res.send("POST ROUTE HERE");
 });
 
-app.get("/locations/new");
+app.get("/locations/:id", function (req, res) {
+    //Replace with Show Page
+    //Render show template with that location
+    console.log("Show Page Goes Here!")
+});
 
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
