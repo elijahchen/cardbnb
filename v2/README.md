@@ -22,3 +22,9 @@ Each location has:
 - Include mongoose
 - Interact with a Mongo Database using Mongoose
 - Create schema and add to model inside of route
+
+# Show Page
+- Confirm RESTful routes are working and implemented
+- Add description to our location model
+- Show db.collection.drop()
+- Add a show route/template
