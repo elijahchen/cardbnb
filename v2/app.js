@@ -67,10 +67,11 @@ app.post("/locations", function (req, res) {
     res.send("POST ROUTE HERE");
 });
 
+//SHOW - shows more info about one location
 app.get("/locations/:id", function (req, res) {
     //Replace with Show Page
     //Render show template with that location
-    console.log("Show Page Goes Here!")
+    res.render("show");
 });
 
 app.listen(3000, process.env.IP, function () {
