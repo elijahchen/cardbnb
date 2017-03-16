@@ -1,4 +1,4 @@
-var express     = require("express"),
+let express     = require("express"),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
     app         = express();
@@ -8,14 +8,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 // === Schema Setup ===
-var locationSchema = new mongoose.Schema({
+const LocationSchema = new mongoose.Schema({
     name: String,
     image: String,
     description: String
 });
 
 // === Model Setup ===
-var Location = mongoose.model("Location", locationSchema);
+const LocationModel = mongoose.model("Location", LocationSchema);
 
 // var locations = [
 //     {name: "loc 1", image: "https://mgnsw.org.au/media/thumbs/uploads/images/DSC_0062_2.jpg.600x400_q85_crop_upscale.jpg"},
@@ -34,22 +34,23 @@ app.get("/", function (req,res) {
 //INDEX ROUTE - show all locations
 app.get("/locations", function (req, res) {
     //Get all locations from DB
-    Location.find({}, function (err, allLocations) {
+    LocationModel.find({}, function (err, allLocations) {
         if(err){
             console.log(err);
         } else {
-            res.render("locations", {locations:allLocations});
+            res.render("index", {locations:allLocations});
         }
     });
 });
 
 //CREATE - Add new route to database
 app.post("/locations", function (req, res) {
-   var name = req.body.name;
-   var image = req.body.image;
-   var newLoc = {name: name, image: image};
+   let name = req.body.name;
+   let image = req.body.image;
+   let desc = req.body.description;
+   let newLoc = {name: name, image: image , description:desc};
    //Create a new location and save to DB
-    Location.create(newLoc, function (err, loc) {
+    LocationModel.create(newLoc, function (err) {
         if(err){
             console.log("ERROR");
         } else {
@@ -70,6 +71,16 @@ app.post("/locations", function (req, res) {
 //SHOW - shows more info about one location
 app.get("/locations/:id", function (req, res) {
     //Replace with Show Page
+    LocationModel.findById(req.params.id, function (err, foundLocation) {
+        if(err){
+            console.log(foundLocation);
+            console.log(err);
+        } else {
+            //Render show template with that location
+            console.log(foundLocation);
+            // res.render("show", {location: foundLocation});
+        }
+    });
     //Render show template with that location
     res.render("show");
 });
