@@ -73,12 +73,11 @@ app.get("/locations/:id", function (req, res) {
     //Replace with Show Page
     LocationModel.findById(req.params.id, function (err, foundLocation) {
         if(err){
-            console.log(foundLocation);
             console.log(err);
         } else {
             //Render show template with that location
             console.log(foundLocation);
-            // res.render("show", {location: foundLocation});
+            res.render("show", {location: foundLocation});
         }
     });
     //Render show template with that location
