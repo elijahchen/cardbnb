@@ -1,5 +1,7 @@
 CHANGELOG
 
+# v3
+- Coming soon!
 
 # v2
 - Enabled data persistence
