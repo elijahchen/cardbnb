@@ -36,3 +36,7 @@ Each location has:
 - NEW     /dogs/new   GET     Display form to make a new dog
 - CREATE  /dogs       POST    Add new dog to DB
 - SHOW    /dogs/:id   GET     Shows info about one dog
+
+# Seeds!
+- Add seeds.js file
+- Run seeds file when server starts
