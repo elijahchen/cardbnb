@@ -1,9 +1,11 @@
-let express     = require("express"),
+const express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
     Location    = require("./models/mLocation");
+    seedDB      = require("./seeds");
 
+seedDB();
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
