@@ -66,8 +66,6 @@ app.get("/locations/:id", function (req, res) {
             res.render("show", {location: foundLocation});
         }
     });
-    //Render show template with that location
-    res.render("show");
 });
 
 app.listen(3000, process.env.IP, function () {
