@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const Location = require("./models/mLocation");
+const mongoose  = require("mongoose");
+const Location  = require("./models/mLocation");
+const Comment   = require("./models/mComment");
 
 let data = [
     {
@@ -26,11 +27,23 @@ function seedDB() {
         console.log("Removed location!")
     });
     data.forEach(function (seed) {
-       Location.create(seed, function (err, data) {
+       Location.create(seed, function (err, loc) {
           if(err){
               console.log(err);
           } else {
               console.log("Added a new location!");
+              Comment.create({
+                  text: "This place is great, WiFi needs work.",
+                  author: "Recent Tenant"
+              }, function (err, comment) {
+                  if(err){
+                      console.log(err);
+                  } else {
+                      loc.comments.push(comment);
+                      loc.save();
+                      console.log("Created new comment!");
+                  }
+              });
           }
        });
     });

@@ -60,10 +60,11 @@ app.get("/locations/new", function (req, res) {
 //SHOW - shows more info about one location
 app.get("/locations/:id", function (req, res) {
     //Replace with Show Page
-    Location.findById(req.params.id, function (err, foundLocation) {
+    Location.findById(req.params.id).populate("comments").exec(function (err, foundLocation) {
         if(err){
             console.log(err);
         } else {
+            console.log(foundLocation);
             //Render show template with that location
             res.render("show", {location: foundLocation});
         }
