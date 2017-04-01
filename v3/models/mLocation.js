@@ -4,8 +4,14 @@ let mongoose = require("mongoose");
 const LocationSchema = new mongoose.Schema({
     name: String,
     image: String,
-    description: String
+    description: String,
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 
-// === Model Setup ===
+// === Model Setup & Export ===
 module.exports = mongoose.model("Location", LocationSchema);
