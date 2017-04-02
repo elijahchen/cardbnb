@@ -71,6 +71,14 @@ app.get("/locations/:id", function (req, res) {
     });
 });
 
+// ==============
+// COMMENT ROUTES
+// ==============
+
+app.get("/locations/:id/comments/new", function (req, res) {
+   res.render("comments/new");
+});
+
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
 });
