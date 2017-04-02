@@ -1,5 +1,8 @@
 CHANGELOG
 
+# v4
+- Coming Soon!
+
 # v3
 - Created a models directory to separate the mongoose models involving the schema
 - Included module.export to the models
