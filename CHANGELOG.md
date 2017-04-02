@@ -1,7 +1,9 @@
 CHANGELOG
 
 # v3
-- Coming soon!
+- Created a models directory to separate the mongoose models involving the schema
+- Included module.export to the models
+- Added a seed file to populate the database
 
 # v2
 - Enabled data persistence
