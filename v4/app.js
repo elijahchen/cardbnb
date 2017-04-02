@@ -1,14 +1,16 @@
-const express     = require("express"),
+const express   = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
-    Location    = require("./models/mLocation");
+    Location    = require("./models/mLocation"),
+    Comment     = require("./models/mComment"),
     seedDB      = require("./seeds");
 
-seedDB();
+mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+seedDB();
 
 // var locations = [
 //     {name: "loc 1", image: "https://mgnsw.org.au/media/thumbs/uploads/images/DSC_0062_2.jpg.600x400_q85_crop_upscale.jpg"},
@@ -20,31 +22,31 @@ app.set("view engine", "ejs");
 //     {name: "loc 7", image: "http://icdn7.digitaltrends.com/image/wikkel1-720x480-c.png"},
 // ];
 
-app.get("/", function (req,res) {
+app.get("/", function (req, res) {
     res.render("landing");
 });
 
 //INDEX ROUTE - show all locations
 app.get("/locations", function (req, res) {
     //Get all locations from DB
-    Location.find({}, function (err, allLocations) {
-        if(err){
+    Location.find({}, function (err, loc) {
+        if (err) {
             console.log(err);
         } else {
-            res.render("locations/index", {locations: allLocations});
+            res.render("locations/index", {locations: loc});
         }
     });
 });
 
 //CREATE - Add new route to database
 app.post("/locations", function (req, res) {
-   let name = req.body.name;
-   let image = req.body.image;
-   let desc = req.body.description;
-   let newLoc = {name: name, image: image , description:desc};
-   //Create a new location and save to DB
+    let name = req.body.name;
+    let image = req.body.image;
+    let desc = req.body.description;
+    let newLoc = {name: name, image: image, description: desc};
+    //Create a new location and save to DB
     Location.create(newLoc, function (err) {
-        if(err){
+        if (err) {
             console.log("ERROR");
         } else {
             res.redirect("/locations");
@@ -54,19 +56,18 @@ app.post("/locations", function (req, res) {
 
 //NEW - show form to create new location
 app.get("/locations/new", function (req, res) {
-   res.render("locations/new");
+    res.render("locations/new");
 });
 
 //SHOW - shows more info about one location
 app.get("/locations/:id", function (req, res) {
     //Replace with Show Page
-    Location.findById(req.params.id).populate("comments").exec(function (err, foundLocation) {
-        if(err){
+    Location.findById(req.params.id).populate("comments").exec(function (err, loc) {
+        if (err) {
             console.log(err);
         } else {
-            console.log(foundLocation);
             //Render show template with that location
-            res.render("locations/show", {location: foundLocation});
+            res.render("locations/show", {location: loc});
         }
     });
 });
@@ -76,7 +77,32 @@ app.get("/locations/:id", function (req, res) {
 // ==============
 
 app.get("/locations/:id/comments/new", function (req, res) {
-   res.render("comments/new");
+    Location.findById(req.params.id, function (err, loc) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("comments/new", {location: loc});
+        }
+    });
+});
+
+app.post("/locations/:id/comments", function (req, res) {
+    Location.findById(req.params.id, function (err, loc) {
+        if (err) {
+            console.log(err);
+            res.redirect("/");
+        } else {
+            Comment.create(req.body.comment, function (err, com) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    loc.comments.push(com);
+                    loc.save();
+                    res.redirect("/locations/" + loc._id);
+                }
+            });
+        }
+    });
 });
 
 app.listen(3000, process.env.IP, function () {
