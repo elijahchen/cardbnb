@@ -31,7 +31,7 @@ app.get("/locations", function (req, res) {
         if(err){
             console.log(err);
         } else {
-            res.render("index", {locations: allLocations});
+            res.render("locations/index", {locations: allLocations});
         }
     });
 });
@@ -54,7 +54,7 @@ app.post("/locations", function (req, res) {
 
 //NEW - show form to create new location
 app.get("/locations/new", function (req, res) {
-   res.render("new.ejs");
+   res.render("locations/new");
 });
 
 //SHOW - shows more info about one location
@@ -66,7 +66,7 @@ app.get("/locations/:id", function (req, res) {
         } else {
             console.log(foundLocation);
             //Render show template with that location
-            res.render("show", {location: foundLocation});
+            res.render("locations/show", {location: foundLocation});
         }
     });
 });
