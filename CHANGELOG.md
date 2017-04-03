@@ -1,7 +1,13 @@
 CHANGELOG
 
+# v5
+- Coming soon!
+
 # v4
-- Coming Soon!
+- Now displaying all related comments on the detail/show page
+- Created nested routes
+- Added a new comment form that makes post db calls
+- Added new and create routes for comments
 
 # v3
 - Created a models directory to separate the mongoose models involving the schema
