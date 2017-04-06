@@ -138,6 +138,19 @@ app.post("/signup", function (req, res) {
     });
 });
 
+// Show the login form
+app.get("/login", function (req, res) {
+    res.render("login");
+});
+
+// Handling the login logic
+app.post("/login", passport.authenticate("local", {
+        successRedirect: "/locations",
+        failureRedirect: "/login"
+    }), function (req, res) {
+        res.send("JFOAJFASJF");
+});
+
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
 });
