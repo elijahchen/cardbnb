@@ -15,6 +15,22 @@ let data = [
         name: "Gewurtz Properties",
         image: "https://c.fastcompany.net/multisite_files/fastcompany/imagecache/slideshow_large/slideshow/2013/11/3021937-slide-750-origami-02.jpg",
         description: "NO FEE. Beautiful open bedroom available for rent in amazing location in East Greenwich Village."
+    },{
+        name: "Brooklyn Group NYC",
+        image: "http://www.cbc.ca/strombo/content/images/the-street-house-feature.jpg",
+        description: "If you are looking for a lot of space for a very fair price, this is the place for you. 4 Very spacious bedrooms, a large living area. This is a duplex apartment. Huge windows that let in a lot of natural light!"
+    },{
+        name: "Fifth & Forever",
+        image: "http://gossiplyfe.com/wp-content/uploads/2015/02/Box_Homes_KLEW.jpg",
+        description: "Beautifully renovated 2 bedroom apartment in an elevator building in the heart of one of the best neighborhoods in Brooklyn. Features brand new stainless steel appliances and a marble bathroom. Surrounded by tons of shopping and entertainment."
+    },{
+        name: "Urban Sanctuary",
+        image: "https://s-media-cache-ak0.pinimg.com/736x/70/f7/9d/70f79de59fc36dba5c5779a112850385.jpg",
+        description: "Price is net effective rent based on one free month on 12 months lease."
+    },{
+        name: "Highline Residential",
+        image: "http://icdn7.digitaltrends.com/image/wikkel1-720x480-c.png",
+        description: "Updated kitchen and bathrooms! Just first and security to move in-no utilities included."
     }
 ];
 
