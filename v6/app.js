@@ -1,10 +1,13 @@
-const express   = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    Location    = require("./models/mLocation"),
-    Comment     = require("./models/mComment"),
-    seedDB      = require("./seeds");
+const express       = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    mongoose        = require("mongoose"),
+    seedDB          = require("./seeds"),
+    passport        = require("passport"),
+    LocalStrategy   = require("passport-local"),
+    User            = require("./models/mUser"),
+    Location        = require("./models/mLocation"),
+    Comment         = require("./models/mComment");
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
