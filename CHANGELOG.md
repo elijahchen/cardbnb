@@ -1,7 +1,8 @@
 CHANGELOG
 
 # v5
-- Coming soon!
+- Added seeds to populate database
+- Improved ui to be less jarring
 
 # v4
 - Now displaying all related comments on the detail/show page
