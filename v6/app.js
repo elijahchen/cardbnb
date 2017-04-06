@@ -151,6 +151,12 @@ app.post("/login", passport.authenticate("local", {
         res.send("JFOAJFASJF");
 });
 
+// Logout
+app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/login");
+});
+
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
 });
