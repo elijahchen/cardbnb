@@ -1,5 +1,8 @@
 CHANGELOG
 
+# v6
+- Coming soon!
+
 # v5
 - Added seeds to populate database
 - Improved ui to be less jarring
