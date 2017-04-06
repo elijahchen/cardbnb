@@ -16,6 +16,21 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 seedDB();
 
+// ======================
+// PASSPORT CONFIGURATION
+// ======================
+app.use(require("express-session")({
+    secret: "The sun rises at noon.",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 // var locations = [
 //     {name: "loc 1", image: "https://mgnsw.org.au/media/thumbs/uploads/images/DSC_0062_2.jpg.600x400_q85_crop_upscale.jpg"},
 //     {name: "loc 2", image: "http://playtivities.com/wp-content/uploads/2015/01/simple-cardboard-house-600x399.jpg"},
@@ -26,6 +41,9 @@ seedDB();
 //     {name: "loc 7", image: "http://icdn7.digitaltrends.com/image/wikkel1-720x480-c.png"},
 // ];
 
+// =============
+// ROUTE MAPPING
+// =============
 app.get("/", function (req, res) {
     res.render("landing");
 });
