@@ -31,16 +31,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// var locations = [
-//     {name: "loc 1", image: "https://mgnsw.org.au/media/thumbs/uploads/images/DSC_0062_2.jpg.600x400_q85_crop_upscale.jpg"},
-//     {name: "loc 2", image: "http://playtivities.com/wp-content/uploads/2015/01/simple-cardboard-house-600x399.jpg"},
-//     {name: "loc 3", image: "https://c.fastcompany.net/multisite_files/fastcompany/imagecache/slideshow_large/slideshow/2013/11/3021937-slide-750-origami-02.jpg"},
-//     {name: "loc 4", image: "http://www.cbc.ca/strombo/content/images/the-street-house-feature.jpg"},
-//     {name: "loc 5", image: "http://gossiplyfe.com/wp-content/uploads/2015/02/Box_Homes_KLEW.jpg"},
-//     {name: "loc 6", image: "https://s-media-cache-ak0.pinimg.com/736x/70/f7/9d/70f79de59fc36dba5c5779a112850385.jpg"},
-//     {name: "loc 7", image: "http://icdn7.digitaltrends.com/image/wikkel1-720x480-c.png"},
-// ];
-
 // =============
 // ROUTE MAPPING
 // =============
@@ -124,6 +114,27 @@ app.post("/locations/:id/comments", function (req, res) {
                 }
             });
         }
+    });
+});
+
+// ==============
+// COMMENT ROUTES
+// ==============
+
+app.get("/signup", function (req, res) {
+   res.render("signup");
+});
+
+app.post("/signup", function (req, res) {
+    let newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function (err, user) {
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function () {
+            res.redirect("/locations");
+        });
     });
 });
 
