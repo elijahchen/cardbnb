@@ -88,7 +88,7 @@ app.get("/locations/:id", function (req, res) {
 // COMMENT ROUTES
 // ==============
 
-app.get("/locations/:id/comments/new", function (req, res) {
+app.get("/locations/:id/comments/new", isLoggedIn, function (req, res) {
     Location.findById(req.params.id, function (err, loc) {
         if (err) {
             console.log(err);
@@ -98,7 +98,7 @@ app.get("/locations/:id/comments/new", function (req, res) {
     });
 });
 
-app.post("/locations/:id/comments", function (req, res) {
+app.post("/locations/:id/comments", isLoggedIn, function (req, res) {
     Location.findById(req.params.id, function (err, loc) {
         if (err) {
             console.log(err);
@@ -154,8 +154,19 @@ app.post("/login", passport.authenticate("local", {
 // Logout
 app.get("/logout", function (req, res) {
     req.logout();
-    res.redirect("/login");
+    res.redirect("/locations");
 });
+
+// =========
+// FUNCTIONS
+// =========
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
