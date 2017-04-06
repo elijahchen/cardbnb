@@ -117,9 +117,9 @@ app.post("/locations/:id/comments", function (req, res) {
     });
 });
 
-// ==============
-// COMMENT ROUTES
-// ==============
+// =====================
+// AUTHENTICATION ROUTES
+// =====================
 
 app.get("/signup", function (req, res) {
    res.render("signup");
