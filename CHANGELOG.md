@@ -1,7 +1,12 @@
 CHANGELOG
 
-# v6
+# v7
 - Coming soon!
+
+# v6
+- Added authentication using passport.js
+- Restricting routes if authentication is not met
+- Added a user model to serialize and deserialize into database
 
 # v5
 - Added seeds to populate database
