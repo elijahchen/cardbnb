@@ -1,7 +1,7 @@
 CHANGELOG
 
 # v7
-- Coming soon!
+- Refactored routes to their own stand alone files within a route directory
 
 # v6
 - Added authentication using passport.js

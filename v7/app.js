@@ -9,6 +9,7 @@ const express       = require("express"),
     Location        = require("./models/mLocation"),
     Comment         = require("./models/mComment");
 
+// Requiring routes
 const commentRoutes     = require("./routes/comments"),
     locationRoutes      = require("./routes/locations"),
     indexRoutes         = require("./routes/index");
