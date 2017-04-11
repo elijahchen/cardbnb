@@ -52,3 +52,10 @@ Each location has:
 
 # Prevent an unauthenticated user from creating a listing
 - Save user and their id to the listing
+
+# Editing a listing
+- Add method-overriding
+- Add edit route for listings
+- Add link to edit page
+- Add update route
+- Fix $set problem
