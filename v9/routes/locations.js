@@ -21,11 +21,15 @@ router.post("/", isLoggedIn, function (req, res) {
     let name = req.body.name;
     let image = req.body.image;
     let desc = req.body.description;
-    let newLoc = {name: name, image: image, description: desc};
+    let author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    let newLoc = {name: name, image: image, description: desc, author: author};
     //Create a new location and save to DB
-    Location.create(newLoc, function (err) {
+    Location.create(newLoc, function (err, loc) {
         if (err) {
-            console.log("ERROR");
+            console.log(err);
         } else {
             res.redirect("/locations");
         }
