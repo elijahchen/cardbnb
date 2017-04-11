@@ -59,3 +59,7 @@ Each location has:
 - Add link to edit page
 - Add update route
 - Fix $set problem
+
+# Deleting a listing (Finalizing CRUD)
+- Add destroy route
+- Add a delete button
