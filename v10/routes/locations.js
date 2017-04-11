@@ -54,6 +54,13 @@ router.get("/:id", function (req, res) {
     });
 });
 
+//EDIT - modifies an existing location
+router.get("/:id/edit", function (req, res) {
+   res.render("locations/edit");
+});
+
+//UPDATE - submits the edited changes
+
 // =========
 // FUNCTIONS
 // =========

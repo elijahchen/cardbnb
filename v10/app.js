@@ -7,7 +7,8 @@ const express       = require("express"),
     LocalStrategy   = require("passport-local"),
     User            = require("./models/mUser"),
     Location        = require("./models/mLocation"),
-    Comment         = require("./models/mComment");
+    Comment         = require("./models/mComment"),
+    methodOverride  = require("method-override");
 
 // Requiring routes
 const commentRoutes     = require("./routes/comments"),
@@ -16,9 +17,10 @@ const commentRoutes     = require("./routes/comments"),
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
-app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 //seed the database
 // seedDB();
