@@ -7,10 +7,10 @@ const LocationSchema = new mongoose.Schema({
     description: String,
     author: {
         id: {
-            username: String,
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }
+        },
+        username: String
     },
     comments: [
         {
