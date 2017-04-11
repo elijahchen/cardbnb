@@ -1,5 +1,9 @@
 CHANGELOG
 
+# v9
+- Prevent an unauthenticated user from creating a listing
+- Save and associate the original user to the listing
+
 # v8
 - Associated users and comments
 - Save author's name to a comment automatically
