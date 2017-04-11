@@ -76,6 +76,17 @@ router.put("/:id", function (req, res) {
     });
 });
 
+//DESTROY - removing the listing
+router.delete("/:id", function (req, res) {
+    Location.findByIdAndRemove(req.params.id, function (err) {
+        if(err){
+            res.redirect("/locations");
+        } else {
+            res.redirect("/locations");
+        }
+    });
+});
+
 // =========
 // FUNCTIONS
 // =========
