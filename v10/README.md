@@ -63,3 +63,4 @@ Each location has:
 # Deleting a listing (Finalizing CRUD)
 - Add destroy route
 - Add a delete button
+- Allow only the original poster to access the edit and delete buttons
