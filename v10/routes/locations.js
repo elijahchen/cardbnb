@@ -56,10 +56,25 @@ router.get("/:id", function (req, res) {
 
 //EDIT - modifies an existing location
 router.get("/:id/edit", function (req, res) {
-   res.render("locations/edit");
+    Location.findById(req.params.id, function (err, loc) {
+        if(err){
+            res.redirect("/locations");
+        } else {
+            res.render("locations/edit", {location: loc});
+        }
+    });
 });
 
 //UPDATE - submits the edited changes
+router.put("/:id", function (req, res) {
+    Location.findByIdAndUpdate(req.params.id, req.body.location, function (err, loc) {
+        if(err){
+            res.redirect("/locations");
+        } else {
+            res.redirect("/locations/" + req.params.id);
+        }
+    });
+});
 
 // =========
 // FUNCTIONS
