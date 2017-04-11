@@ -70,3 +70,4 @@ Each location has:
 - Add delete button
 - Only owners can edit/delete their comments
 - Hide/show the edit/delete buttons
+- Refactor middleware
