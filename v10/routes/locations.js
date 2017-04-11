@@ -1,6 +1,7 @@
 const express   = require("express"),
     router      = express.Router(),
-    Location    = require("../models/mLocation");
+    Location    = require("../models/mLocation"),
+    middleware  = require("../middleware");
 
 // ============
 // INDEX ROUTES - show all locations
@@ -17,7 +18,7 @@ router.get("/", function (req, res) {
 });
 
 //CREATE - Add new route to database
-router.post("/", isLoggedIn, function (req, res) {
+router.post("/", middleware.isLoggedIn, function (req, res) {
     let name = req.body.name;
     let image = req.body.image;
     let desc = req.body.description;
@@ -37,7 +38,7 @@ router.post("/", isLoggedIn, function (req, res) {
 });
 
 //NEW - show form to create new location
-router.get("/new", isLoggedIn, function (req, res) {
+router.get("/new", middleware.isLoggedIn, function (req, res) {
     res.render("locations/new");
 });
 
@@ -55,14 +56,14 @@ router.get("/:id", function (req, res) {
 });
 
 //EDIT - modifies an existing location
-router.get("/:id/edit", verifyOwner, function (req, res) {
+router.get("/:id/edit", middleware.verifyPostOwner, function (req, res) {
     Location.findById(req.params.id, function (err, loc) {
         res.render("locations/edit", {location: loc});
     });
 });
 
 //UPDATE - submits the edited changes
-router.put("/:id", verifyOwner, function (req, res) {
+router.put("/:id", middleware.verifyPostOwner, function (req, res) {
     Location.findByIdAndUpdate(req.params.id, req.body.location, function (err, loc) {
         if(err){
             res.redirect("/locations");
@@ -73,7 +74,7 @@ router.put("/:id", verifyOwner, function (req, res) {
 });
 
 //DESTROY - removing the listing
-router.delete("/:id", verifyOwner, function (req, res) {
+router.delete("/:id", middleware.verifyPostOwner, function (req, res) {
     Location.findByIdAndRemove(req.params.id, function (err) {
         if(err){
             res.redirect("/locations");
@@ -82,36 +83,5 @@ router.delete("/:id", verifyOwner, function (req, res) {
         }
     });
 });
-
-// =========
-// FUNCTIONS
-// =========
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
-
-function verifyOwner(req, res, next) {
-    // Is user authenticated
-    if(req.isAuthenticated()){
-        Location.findById(req.params.id, function (err, loc) {
-            if(err){
-                res.redirect("back");
-            } else {
-                // Does user own the listing
-                if(loc.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    res.redirect("back")
-                }
-            }
-        });
-    } else {
-        res.redirect("back");
-    }
-}
 
 module.exports = router;
