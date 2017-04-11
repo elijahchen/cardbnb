@@ -37,31 +37,31 @@ let data = [
 function seedDB() {
     // Remove all listings
     Location.remove({}, function (err) {
-        if(err){
-            console.log(err);
-        }
-        console.log("Removed location!")
-    });
-    data.forEach(function (seed) {
-       Location.create(seed, function (err, loc) {
-          if(err){
-              console.log(err);
-          } else {
-              console.log("Added a new location!");
-              Comment.create({
-                  text: "This place is great, WiFi needs work.",
-                  author: "Recent Tenant"
-              }, function (err, comment) {
-                  if(err){
-                      console.log(err);
-                  } else {
-                      loc.comments.push(comment);
-                      loc.save();
-                      console.log("Created new comment!");
-                  }
-              });
-          }
-       });
+        // if(err){
+        //     console.log(err);
+        // }
+        // console.log("Removed location!")
+    // });
+    // data.forEach(function (seed) {
+    //    Location.create(seed, function (err, loc) {
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //           console.log("Added a new location!");
+    //           Comment.create({
+    //               text: "This place is great, WiFi needs work.",
+    //               author: "Recent Tenant"
+    //           }, function (err, comment) {
+    //               if(err){
+    //                   console.log(err);
+    //               } else {
+    //                   loc.comments.push(comment);
+    //                   loc.save();
+    //                   console.log("Created new comment!");
+    //               }
+    //           });
+    //       }
+    //    });
     });
 }
 

@@ -1,5 +1,9 @@
 CHANGELOG
 
+# v8
+- Associated users and comments
+- Save author's name to a comment automatically
+
 # v7
 - Refactored routes to their own stand alone files within a route directory
 

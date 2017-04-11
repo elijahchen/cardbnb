@@ -27,6 +27,10 @@ router.post("/", isLoggedIn, function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
+                    // Add username and id to connecgt
+                    Comment.author.id = req.user._id;
+                    Comment.author.username = req.user.username;
+                    // Save comment
                     loc.comments.push(com);
                     loc.save();
                     res.redirect("/locations/" + loc._id);
