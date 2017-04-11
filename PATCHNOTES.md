@@ -1,5 +1,23 @@
 CHANGELOG
 
+# v10
+- Editing a listing
+    - Added method-overriding
+    - Added edit route for listings
+    - Added link to edit page
+    - Added update route
+    - Fixed $set problem
+- Deleting a listing (Finalizing CRUD)
+    - Added destroy route
+    - Added a delete button
+    - Allow only the original poster to access the edit and delete buttons
+- Editing & deleting comments
+    - Added destroy route
+    - Added delete button
+    - Only owners can edit/delete their comments
+    - Hide/show the edit/delete buttons
+    - Refactored middleware
+
 # v9
 - Prevent an unauthenticated user from creating a listing
 - Save and associate the original user to the listing
