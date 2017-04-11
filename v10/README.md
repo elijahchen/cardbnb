@@ -64,3 +64,9 @@ Each location has:
 - Add destroy route
 - Add a delete button
 - Allow only the original poster to access the edit and delete buttons
+
+# Editing & deleting comments
+- Add destroy route
+- Add delete button
+- Only owners can edit/delete their comments
+- Hide/show the edit/delete buttons
