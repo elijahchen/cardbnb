@@ -41,6 +41,40 @@ router.post("/", isLoggedIn, function (req, res) {
     });
 });
 
+// Comments edit
+router.get("/:comment_id/edit", function (req, res) {
+    Comment.findById(req.params.comment_id, function (err, com) {
+        if(err){
+            res.redirect("back");
+        } else {
+            res.render("comments/edit", {location_id: req.params.id, comment: com});
+        }
+    });
+});
+
+// Comments update
+router.put("/:comment_id", function (req, res) {
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function (err, com) {
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/locations/" + req.params.id);
+        }
+    });
+});
+
+// Comments destroy
+router.delete("/:comment_id", function (req, res) {
+    Comment.findByIdAndRemove(req.params.comment_id, function (err) {
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/locations/" + req.params.id);
+        }
+    });
+});
+
+
 // =========
 // FUNCTIONS
 // =========
