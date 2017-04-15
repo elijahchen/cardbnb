@@ -41,12 +41,12 @@ router.post("/login", passport.authenticate("local", {
     successRedirect: "/locations",
     failureRedirect: "/login"
 }), function (req, res) {
-    res.send("JFOAJFASJF");
 });
 
 // Logout
 router.get("/logout", function (req, res) {
     req.logout();
+    req.flash("success", "You have successfully logged out!")
     res.redirect("/locations");
 });
 
