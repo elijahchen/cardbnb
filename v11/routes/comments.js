@@ -11,7 +11,7 @@ const express = require("express"),
 router.get("/new", middleware.isLoggedIn, function (req, res) {
     Location.findById(req.params.id, function (err, loc) {
         if (err) {
-            console.log(err);
+            req.flash("error", "Something went wrong!");
         } else {
             res.render("comments/new", {location: loc});
         }
@@ -21,12 +21,12 @@ router.get("/new", middleware.isLoggedIn, function (req, res) {
 router.post("/", middleware.isLoggedIn, function (req, res) {
     Location.findById(req.params.id, function (err, loc) {
         if (err) {
-            console.log(err);
-            res.redirect("/");
+            req.flash("error", "Something went wrong!");
+            res.redirect("back");
         } else {
             Comment.create(req.body.comment, function (err, com) {
                 if (err) {
-                    console.log(err);
+                    req.flash("error", "Something went wrong!");
                 } else {
                     // Add username and id to connect
                     com.author.id = req.user._id;
@@ -35,6 +35,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
 
                     loc.comments.push(com);
                     loc.save();
+                    req.flash("error", "Successfully added a comment!");
                     res.redirect("/locations/" + loc._id);
                 }
             });
@@ -59,6 +60,7 @@ router.put("/:comment_id", middleware.verifyCommentOwner, function (req, res) {
         if(err){
             res.redirect("back");
         } else {
+            req.flash("success", "Comment editted!");
             res.redirect("/locations/" + req.params.id);
         }
     });
@@ -70,6 +72,7 @@ router.delete("/:comment_id", middleware.verifyCommentOwner, function (req, res)
         if(err){
             res.redirect("back");
         } else {
+            req.flash("success", "Comment deleted!");
             res.redirect("/locations/" + req.params.id);
         }
     });
