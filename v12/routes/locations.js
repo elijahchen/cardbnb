@@ -1,7 +1,8 @@
 const express   = require("express"),
     router      = express.Router(),
     Location    = require("../models/mLocation"),
-    middleware  = require("../middleware");
+    middleware  = require("../middleware"),
+    geocoder    = require("geocoder");
 
 // ============
 // INDEX ROUTES - show all locations
@@ -19,6 +20,7 @@ router.get("/", function (req, res) {
 
 //CREATE - Add new route to database
 router.post("/", middleware.isLoggedIn, function (req, res) {
+    // Retrieve data from form and add to locations array
     let name = req.body.name;
     let price = req.body.price;
     let image = req.body.image;
@@ -27,14 +29,27 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
         id: req.user._id,
         username: req.user.username
     };
-    let newLoc = {name: name, price: price, image: image, description: desc, author: author};
-    //Create a new location and save to DB
-    Location.create(newLoc, function (err, loc) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect("/locations");
-        }
+    geocoder.geocode(req.body.location, function (err, data) {
+        let lat = data.results[0].geometry.location.lat;
+        let lng = data.results[0].geometry.location.lng;
+        let location = data.results[0].formatted_address;
+        let newLoc = {
+            name: name,
+            price: price,
+            image: image,
+            description: desc,
+            author: author,
+            location: location,
+            lat: lat, lng: lng
+        };
+        //Create a new location and save to DB
+        Location.create(newLoc, function (err, loc) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect("/locations");
+            }
+        });
     });
 });
 
@@ -65,12 +80,28 @@ router.get("/:id/edit", middleware.verifyPostOwner, function (req, res) {
 
 //UPDATE - submits the edited changes
 router.put("/:id", middleware.verifyPostOwner, function (req, res) {
-    Location.findByIdAndUpdate(req.params.id, req.body.location, function (err, loc) {
-        if(err){
-            res.redirect("/locations");
-        } else {
-            res.redirect("/locations/" + req.params.id);
-        }
+    geocoder.geocode(req.body.location, function (err, data) {
+        let lat = data.results[0].geometry.location.lat;
+        let lng = data.results[0].geometry.location.lng;
+        let location = data.results[0].formatted_address;
+        let newLoc = {
+            name: name,
+            price: price,
+            image: image,
+            description: desc,
+            author: author,
+            location: location,
+            lat: lat, lng: lng
+        };
+        Location.findByIdAndUpdate(req.params.id, {$set: newLoc}, function (err, loc) {
+            if(err){
+                req.flash("error", err.message);
+                res.redirect("back");
+            } else {
+                req.flash("success", "Successfully Updated!")
+                res.redirect("/locations/" + loc._id);
+            }
+        });
     });
 });
 
