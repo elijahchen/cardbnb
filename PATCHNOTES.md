@@ -2,6 +2,7 @@ CHANGELOG
 
 # v11
 - Added flash messages for a more responsive experience
+- Added functionality to store price
 
 # v10
 - Editing a listing

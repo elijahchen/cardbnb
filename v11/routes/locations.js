@@ -20,13 +20,14 @@ router.get("/", function (req, res) {
 //CREATE - Add new route to database
 router.post("/", middleware.isLoggedIn, function (req, res) {
     let name = req.body.name;
+    let price = req.body.price;
     let image = req.body.image;
     let desc = req.body.description;
     let author = {
         id: req.user._id,
         username: req.user.username
     };
-    let newLoc = {name: name, image: image, description: desc, author: author};
+    let newLoc = {name: name, price: price, image: image, description: desc, author: author};
     //Create a new location and save to DB
     Location.create(newLoc, function (err, loc) {
         if (err) {
