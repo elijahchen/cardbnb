@@ -1,5 +1,9 @@
 CHANGELOG
 
+# v12
+- Adding Google maps to application
+- Allowing editing/display of real-world coordinates
+
 # v11
 - Added flash messages for a more responsive experience
 - Added functionality to store price
