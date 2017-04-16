@@ -1,5 +1,8 @@
 CHANGELOG
 
+# v11
+- Added flash messages for a more responsive experience
+
 # v10
 - Editing a listing
     - Added method-overriding
