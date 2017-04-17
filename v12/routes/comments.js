@@ -35,7 +35,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
 
                     loc.comments.push(com);
                     loc.save();
-                    req.flash("error", "Successfully added a comment!");
+                    req.flash("success", "Successfully added a comment!");
                     res.redirect("/locations/" + loc._id);
                 }
             });
