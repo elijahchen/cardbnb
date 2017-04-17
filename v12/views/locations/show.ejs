@@ -14,7 +14,7 @@
         <div class="thumbnail">
             <img class="img-responsive" src="<%= location.image %>">
             <div class="caption-full">
-                <h4 class="pull-right">$<%=location.price%>/night</h4>
+                <h4 class="pull-right">$<%= location.price %>/night</h4>
                 <h4><a><%= location.name %></a></h4>
                 <p><%= location.description %></p>
                 <p><em>Submitted by <%= location.author.username %></em></p>
@@ -31,14 +31,12 @@
                 <a class="btn btn-success" href="/locations/<%= location._id %>/comments/new">Add New Comment</a>
             </div>
             <hr>
-            <% location.comments.forEach(function(comment){%>
+            <% location.comments.forEach(function(comment){ %>
                 <div class="row">
                     <div class="col-md-12">
                         <%= comment.author.username %>
                         <span class="pull-right">10 days ago</span>
-                        <p>
-                            <%= comment.text %>
-                        </p>
+                        <p><%= comment.text %></p>
                         <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a href="/locations/<%=location._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-warning">Edit</a>
                             <form id="delete-form" action="/locations/<%=location._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
