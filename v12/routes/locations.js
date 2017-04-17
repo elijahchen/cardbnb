@@ -13,7 +13,7 @@ router.get("/", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("locations/index", {locations: loc, currentUser: req.user});
+            res.render("locations/index", {locations: loc, currentUser: req.user, page: "locations"});
         }
     });
 });

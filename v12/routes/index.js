@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
 // =====================
 
 router.get("/signup", function (req, res) {
-    res.render("signup");
+    res.render("signup", {page: "signup"});
 });
 
 router.post("/signup", function (req, res) {
@@ -35,7 +35,7 @@ router.post("/signup", function (req, res) {
 
 // Show the login form
 router.get("/login", function (req, res) {
-    res.render("login");
+    res.render("login", {page: "login"});
 });
 
 // Handling the login logic
