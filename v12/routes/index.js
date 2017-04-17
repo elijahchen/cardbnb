@@ -27,7 +27,7 @@ router.post("/signup", function (req, res) {
             return res.redirect("/signup");
         }
         passport.authenticate("local")(req, res, function () {
-            req.flash("success", "Welcome to carbnb!" + req.body.username);
+            req.flash("success", "Welcome to carbnb! " + req.body.username);
             res.redirect("/locations");
         });
     });
@@ -41,7 +41,9 @@ router.get("/login", function (req, res) {
 // Handling the login logic
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/locations",
-    failureRedirect: "/login"
+    successFlash: "Welcome back!",
+    failureRedirect: "/login",
+    failureFlash: "Username or password is incorrect.",
 }), function (req, res) {
 });
 
