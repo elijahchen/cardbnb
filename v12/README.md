@@ -91,3 +91,6 @@ Each location has:
 - Nav-Bar menu
 - Add expandable menu stack
 - Make web app responsive for mobile
+
+# Timestamps with MomentJS
+- Display time passed since date created
