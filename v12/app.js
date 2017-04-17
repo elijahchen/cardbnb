@@ -27,6 +27,8 @@ app.use(flash());
 //seed the database
 // seedDB();
 
+app.locals.moment = require("moment");
+
 // ======================
 // PASSPORT CONFIGURATION
 // ======================
@@ -45,7 +47,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(function (req, res, next) {
    res.locals.currentUser = req.user;
    res.locals.error = req.flash("error");
-   res.locals.success = req.flash("success")
+   res.locals.success = req.flash("success");
    next(); // Necessary to continue from middleware
 });
 
