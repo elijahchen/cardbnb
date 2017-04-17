@@ -85,3 +85,9 @@ Each location has:
 - Update location model
 - Update new, edit, and show forms
 - Update routes accordingly
+
+# Styling everything else
+- Login & Sign Up
+- Nav-Bar menu
+- Add expandable menu stack
+- Make web app responsive for mobile
